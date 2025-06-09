@@ -5,6 +5,22 @@ import pandas as pd
 import os
 import json
 import requests
+import streamlit as st
+
+# 🔒 Mot de passe à définir ici
+CORRECT_PASSWORD = "million$tracker2024"
+
+# Authentification simple
+if "authenticated" not in st.session_state:
+    st.session_state["authenticated"] = False
+
+if not st.session_state["authenticated"]:
+    password = st.text_input("Mot de passe", type="password")
+    if password == CORRECT_PASSWORD:
+        st.session_state["authenticated"] = True
+        st.experimental_rerun()
+    else:
+        st.stop()
 
 # -------------------- CONFIGURATION -------------------- #
 DEFAULT_WATCHLIST = ["HAG.DE", "RHM.DE", "HO.PA", "LDO.MI", "NVDA", "MSFT", "META", "AVGO"]
